@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- 突破沙盒限制 - 核心权限 -->
+	<key>com.apple.private.security.container-required</key>
+	<false/>
+
+	<!-- 平台级应用权限 - 系统应用级别 -->
+	<key>platform-application</key>
+	<true/>
+
+	<!-- 绝对路径读写根目录 - Filza 关键权限！ -->
+	<key>com.apple.security.exception.files.absolute-path.read-write</key>
+	<array>
+		<string>/</string>
+	</array>
+
+	<!-- 访问所有文件 - 文件系统完全访问 -->
+	<key>com.apple.security.files.all</key>
+	<true/>
+
+	<!-- 无容器限制 - 跨容器访问 -->
+	<key>com.apple.private.security.no-container</key>
+	<true/>
+
+	<!-- 访问应用数据容器 - Filza 关键权限 -->
+	<key>com.apple.private.security.storage.AppDataContainers</key>
+	<true/>
+
+	<!-- 容器管理器权限 - 访问所有应用容器的核心权限！ -->
+	<key>com.apple.private.security.container-manager</key>
+	<true/>
+
+	<!-- Mobile Container Manager - Filza 使用的关键权限！ -->
+	<key>com.apple.private.MobileContainerManager.allowed</key>
+	<true/>
+
+	<!-- 用户选择的文件只读 - 增强兼容性 -->
+	<key>com.apple.security.files.user-selected.read-only</key>
+	<true/>
+
+	<!-- 用户选择的文件读写 - 完整访问权限 -->
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+
+	<!-- 根文件系统只读 - TrollStore 环境支持 -->
+	<key>com.apple.security.files.root.read-only</key>
+	<true/>
+
+	<!-- 根文件系统读写 - 最高权限 -->
+	<key>com.apple.security.files.root.read-write</key>
+	<true/>
+
+	<!-- 访问所有应用组容器 - 访问共享容器 -->
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>*</string>
+	</array>
+
+	<!-- 任务端口访问 - 进程间通信 -->
+	<key>task_for_pid-allow</key>
+	<true/>
+
+	<!-- 获取任务允许 - 调试和进程访问 -->
+	<key>get-task-allow</key>
+	<true/>
+
+	<!-- 禁用沙盒 - 文件系统完全访问 -->
+	<key>com.apple.private.security.no-sandbox</key>
+	<true/>
+
+	<!-- Persona 管理权限 -->
+	<key>com.apple.private.persona-mgmt</key>
+	<true/>
+</dict>
+</plist>

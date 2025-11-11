@@ -1,0 +1,568 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		AEABCFC52EC0D33F00A61709 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AEABCFA62EC0D33E00A61709 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AEABCFAD2EC0D33E00A61709;
+			remoteInfo = WechatVideoReplacer;
+		};
+		AEABCFCF2EC0D33F00A61709 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AEABCFA62EC0D33E00A61709 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AEABCFAD2EC0D33E00A61709;
+			remoteInfo = WechatVideoReplacer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AEABCFAE2EC0D33E00A61709 /* WechatVideoReplacer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WechatVideoReplacer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEABCFC42EC0D33F00A61709 /* WechatVideoReplacerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WechatVideoReplacerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEABCFCE2EC0D33F00A61709 /* WechatVideoReplacerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WechatVideoReplacerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AEABCFD62EC0D33F00A61709 /* Exceptions for "WechatVideoReplacer" folder in "WechatVideoReplacer" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AEABCFAD2EC0D33E00A61709 /* WechatVideoReplacer */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		AEABCFB02EC0D33E00A61709 /* WechatVideoReplacer */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AEABCFD62EC0D33F00A61709 /* Exceptions for "WechatVideoReplacer" folder in "WechatVideoReplacer" target */,
+			);
+			path = WechatVideoReplacer;
+			sourceTree = "<group>";
+		};
+		AEABCFC72EC0D33F00A61709 /* WechatVideoReplacerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = WechatVideoReplacerTests;
+			sourceTree = "<group>";
+		};
+		AEABCFD12EC0D33F00A61709 /* WechatVideoReplacerUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = WechatVideoReplacerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AEABCFAB2EC0D33E00A61709 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEABCFC12EC0D33F00A61709 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEABCFCB2EC0D33F00A61709 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AEABCFA52EC0D33E00A61709 = {
+			isa = PBXGroup;
+			children = (
+				AEABCFB02EC0D33E00A61709 /* WechatVideoReplacer */,
+				AEABCFC72EC0D33F00A61709 /* WechatVideoReplacerTests */,
+				AEABCFD12EC0D33F00A61709 /* WechatVideoReplacerUITests */,
+				AEABCFAF2EC0D33E00A61709 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AEABCFAF2EC0D33E00A61709 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AEABCFAE2EC0D33E00A61709 /* WechatVideoReplacer.app */,
+				AEABCFC42EC0D33F00A61709 /* WechatVideoReplacerTests.xctest */,
+				AEABCFCE2EC0D33F00A61709 /* WechatVideoReplacerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AEABCFAD2EC0D33E00A61709 /* WechatVideoReplacer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AEABCFD72EC0D33F00A61709 /* Build configuration list for PBXNativeTarget "WechatVideoReplacer" */;
+			buildPhases = (
+				AEABCFAA2EC0D33E00A61709 /* Sources */,
+				AEABCFAB2EC0D33E00A61709 /* Frameworks */,
+				AEABCFAC2EC0D33E00A61709 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AEABCFB02EC0D33E00A61709 /* WechatVideoReplacer */,
+			);
+			name = WechatVideoReplacer;
+			packageProductDependencies = (
+			);
+			productName = WechatVideoReplacer;
+			productReference = AEABCFAE2EC0D33E00A61709 /* WechatVideoReplacer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AEABCFC32EC0D33F00A61709 /* WechatVideoReplacerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AEABCFDC2EC0D33F00A61709 /* Build configuration list for PBXNativeTarget "WechatVideoReplacerTests" */;
+			buildPhases = (
+				AEABCFC02EC0D33F00A61709 /* Sources */,
+				AEABCFC12EC0D33F00A61709 /* Frameworks */,
+				AEABCFC22EC0D33F00A61709 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AEABCFC62EC0D33F00A61709 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AEABCFC72EC0D33F00A61709 /* WechatVideoReplacerTests */,
+			);
+			name = WechatVideoReplacerTests;
+			packageProductDependencies = (
+			);
+			productName = WechatVideoReplacerTests;
+			productReference = AEABCFC42EC0D33F00A61709 /* WechatVideoReplacerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AEABCFCD2EC0D33F00A61709 /* WechatVideoReplacerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AEABCFDF2EC0D33F00A61709 /* Build configuration list for PBXNativeTarget "WechatVideoReplacerUITests" */;
+			buildPhases = (
+				AEABCFCA2EC0D33F00A61709 /* Sources */,
+				AEABCFCB2EC0D33F00A61709 /* Frameworks */,
+				AEABCFCC2EC0D33F00A61709 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AEABCFD02EC0D33F00A61709 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AEABCFD12EC0D33F00A61709 /* WechatVideoReplacerUITests */,
+			);
+			name = WechatVideoReplacerUITests;
+			packageProductDependencies = (
+			);
+			productName = WechatVideoReplacerUITests;
+			productReference = AEABCFCE2EC0D33F00A61709 /* WechatVideoReplacerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AEABCFA62EC0D33E00A61709 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1610;
+				LastUpgradeCheck = 1610;
+				TargetAttributes = {
+					AEABCFAD2EC0D33E00A61709 = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					AEABCFC32EC0D33F00A61709 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = AEABCFAD2EC0D33E00A61709;
+					};
+					AEABCFCD2EC0D33F00A61709 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = AEABCFAD2EC0D33E00A61709;
+					};
+				};
+			};
+			buildConfigurationList = AEABCFA92EC0D33E00A61709 /* Build configuration list for PBXProject "WechatVideoReplacer" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AEABCFA52EC0D33E00A61709;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = AEABCFAF2EC0D33E00A61709 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AEABCFAD2EC0D33E00A61709 /* WechatVideoReplacer */,
+				AEABCFC32EC0D33F00A61709 /* WechatVideoReplacerTests */,
+				AEABCFCD2EC0D33F00A61709 /* WechatVideoReplacerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AEABCFAC2EC0D33E00A61709 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEABCFC22EC0D33F00A61709 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEABCFCC2EC0D33F00A61709 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AEABCFAA2EC0D33E00A61709 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEABCFC02EC0D33F00A61709 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEABCFCA2EC0D33F00A61709 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AEABCFC62EC0D33F00A61709 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AEABCFAD2EC0D33E00A61709 /* WechatVideoReplacer */;
+			targetProxy = AEABCFC52EC0D33F00A61709 /* PBXContainerItemProxy */;
+		};
+		AEABCFD02EC0D33F00A61709 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AEABCFAD2EC0D33E00A61709 /* WechatVideoReplacer */;
+			targetProxy = AEABCFCF2EC0D33F00A61709 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AEABCFD82EC0D33F00A61709 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WechatVideoReplacer/entitlements.plist;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WechatVideoReplacer/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.WechatVideoReplacer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		AEABCFD92EC0D33F00A61709 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WechatVideoReplacer/entitlements.plist;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WechatVideoReplacer/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.WechatVideoReplacer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		AEABCFDA2EC0D33F00A61709 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AEABCFDB2EC0D33F00A61709 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AEABCFDD2EC0D33F00A61709 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.WechatVideoReplacerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WechatVideoReplacer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WechatVideoReplacer";
+			};
+			name = Debug;
+		};
+		AEABCFDE2EC0D33F00A61709 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.WechatVideoReplacerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WechatVideoReplacer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WechatVideoReplacer";
+			};
+			name = Release;
+		};
+		AEABCFE02EC0D33F00A61709 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.WechatVideoReplacerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WechatVideoReplacer;
+			};
+			name = Debug;
+		};
+		AEABCFE12EC0D33F00A61709 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.WechatVideoReplacerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WechatVideoReplacer;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AEABCFA92EC0D33E00A61709 /* Build configuration list for PBXProject "WechatVideoReplacer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEABCFDA2EC0D33F00A61709 /* Debug */,
+				AEABCFDB2EC0D33F00A61709 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AEABCFD72EC0D33F00A61709 /* Build configuration list for PBXNativeTarget "WechatVideoReplacer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEABCFD82EC0D33F00A61709 /* Debug */,
+				AEABCFD92EC0D33F00A61709 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AEABCFDC2EC0D33F00A61709 /* Build configuration list for PBXNativeTarget "WechatVideoReplacerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEABCFDD2EC0D33F00A61709 /* Debug */,
+				AEABCFDE2EC0D33F00A61709 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AEABCFDF2EC0D33F00A61709 /* Build configuration list for PBXNativeTarget "WechatVideoReplacerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEABCFE02EC0D33F00A61709 /* Debug */,
+				AEABCFE12EC0D33F00A61709 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AEABCFA62EC0D33E00A61709 /* Project object */;
+}

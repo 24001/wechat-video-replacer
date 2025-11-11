@@ -1,0 +1,17 @@
+# Xcode
+*.xcuserstate
+.DS_Store
+build/
+DerivedData/
+
+# Video files
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# IPA files  
+*.ipa
+
+# Backup files
+*.backup
