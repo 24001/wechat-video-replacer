@@ -113,15 +113,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    /// 授权状态标签
-    private let licenseStatusLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .systemGreen
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+
 
     // MARK: - 属性
 
@@ -152,7 +144,6 @@ class ViewController: UIViewController {
         view.addSubview(changeVideoButton)
         view.addSubview(replaceButton)
         view.addSubview(statusLabel)
-        view.addSubview(licenseStatusLabel)
         view.addSubview(diagnosticButton)
         view.addSubview(clearCacheButton)
 
@@ -195,11 +186,6 @@ class ViewController: UIViewController {
             statusLabel.topAnchor.constraint(equalTo: replaceButton.bottomAnchor, constant: 30),
             statusLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             statusLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            
-            // 授权状态标签
-            licenseStatusLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
-            licenseStatusLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            licenseStatusLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
 
             // 诊断按钮（底部左侧）
             diagnosticButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
@@ -305,17 +291,6 @@ class ViewController: UIViewController {
 
     @objc private func replaceButtonTapped() {
         guard !isExecuting else { return }
-
-        // 检查授权状态
-        let licenseStatus = LicenseService.checkLicenseStatus()
-        guard licenseStatus.valid else {
-            if licenseStatus.expired {
-                showAlert(title: "授权过期", message: "您的授权已过期，请重新启动应用进行验证")
-            } else {
-                showAlert(title: "授权无效", message: "未检测到有效授权，请重新启动应用进行验证")
-            }
-            return
-        }
 
         // ⚠️ 重要：在显示 alert 之前预先获取并缓存微信路径
         // iOS 私有权限可能不允许在 UIAlertController callback 中使用
@@ -441,22 +416,6 @@ class ViewController: UIViewController {
             replaceButton.isEnabled = false
             replaceButton.backgroundColor = UIColor.systemGray
             statusLabel.text = "请先选择素材"
-        }
-        
-        updateLicenseStatus()
-    }
-    
-    private func updateLicenseStatus() {
-        let status = LicenseService.checkLicenseStatus()
-        if status.valid {
-            licenseStatusLabel.text = "🔐 授权状态：已激活"
-            licenseStatusLabel.textColor = .systemGreen
-        } else if status.expired {
-            licenseStatusLabel.text = "⚠️ 授权状态：已过期"
-            licenseStatusLabel.textColor = .systemOrange
-        } else {
-            licenseStatusLabel.text = "❌ 授权状态：未激活"
-            licenseStatusLabel.textColor = .systemRed
         }
     }
 

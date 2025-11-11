@@ -16,32 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-        
-        // 检查授权状态
-        let licenseStatus = LicenseService.checkLicenseStatus()
-        
-        if licenseStatus.valid {
-            // 授权有效，直接进入主应用
-            print("🔐 [App] 检测到有效授权，进入主应用")
-            let mainViewController = ViewController()
-            window?.rootViewController = mainViewController
-        } else {
-            // 需要验证授权
-            print("🔐 [App] 需要验证授权")
-            showLicenseVerification()
-        }
-        
+        window?.rootViewController = ViewController()
         window?.makeKeyAndVisible()
-    }
-    
-    private func showLicenseVerification() {
-        let licenseVC = LicenseViewController()
-        licenseVC.onLicenseVerified = { [weak self] in
-            print("🔐 [App] 授权验证成功，切换到主应用")
-            let mainViewController = ViewController()
-            self?.window?.rootViewController = mainViewController
-        }
-        window?.rootViewController = licenseVC
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
