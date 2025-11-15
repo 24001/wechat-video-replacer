@@ -16,8 +16,66 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = ViewController()
+
+        // 检查授权
+        if LicenseManager.shared.isValid() {
+            // 授权有效，直接进入主界面
+            window?.rootViewController = ViewController()
+            print("✅ [授权] 授权有效，进入主界面")
+        } else {
+            // 授权无效，显示授权界面
+            let licenseVC = LicenseViewController()
+            licenseVC.onSuccess = { [weak self] in
+                // 授权成功后，切换到主界面
+                self?.window?.rootViewController = ViewController()
+                print("✅ [授权] 授权验证成功，进入主界面")
+            }
+            window?.rootViewController = licenseVC
+            print("⚠️ [授权] 授权无效，显示授权界面")
+        }
+        
         window?.makeKeyAndVisible()
+    }
+    
+    // MARK: - 完整授权测试
+    
+    func testEncryption() {
+        print("\n" + String(repeating: "=", count: 60))
+        print("🧪 [测试] 开始完整授权测试")
+        print(String(repeating: "=", count: 60))
+        
+        // 使用真实卡密测试
+        let cardNumber = "slPnNu6QyzxeRZvz2iVIXDT6gA"
+        print("\n1️⃣ 测试卡密: \(cardNumber)")
+        
+        // 调用完整验证流程
+        BSPHPService.fullVerify(cardNumber: cardNumber, cardPassword: "") { result in
+            print("\n" + String(repeating: "=", count: 60))
+            switch result {
+            case .success(let license):
+                print("✅ [测试] 验证成功！")
+                print("   卡号: \(license.cardNumber)")
+                print("   设备: \(license.deviceKey)")
+                print("   过期: \(license.expireDate)")
+                print("   剩余天数: \(license.remainingDays)")
+                
+                // 保存授权信息
+                LicenseManager.shared.save(license)
+                print("✅ [测试] 授权已保存")
+                
+            case .failure(let error):
+                print("❌ [测试] 验证失败: \(error.localizedDescription)")
+                if let nsError = error as NSError? {
+                    print("   错误码: \(nsError.code)")
+                    print("   错误域: \(nsError.domain)")
+                    if let userInfo = nsError.userInfo[NSLocalizedDescriptionKey] as? String {
+                        print("   详细信息: \(userInfo)")
+                    }
+                }
+            }
+            print(String(repeating: "=", count: 60))
+            print("\n")
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
