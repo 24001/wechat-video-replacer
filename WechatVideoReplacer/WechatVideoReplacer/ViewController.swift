@@ -11,7 +11,7 @@ import PhotosUI
 import UniformTypeIdentifiers
 
 /**
- * 功能描述: 主视图控制器 - iOS 原生 UITableView 设计
+ * 功能描述: 主视图控制器 - iOS 系统设置风格
  */
 class ViewController: UIViewController {
 
@@ -24,12 +24,9 @@ class ViewController: UIViewController {
         table.dataSource = self
         table.translatesAutoresizingMaskIntoConstraints = false
         table.backgroundColor = .systemGroupedBackground
-        table.separatorInset = UIEdgeInsets(top: 0, left: 52, bottom: 0, right: 0) // 对齐图标后的文本
 
-        // 注册自定义 Cell
-        table.register(VideoInfoCell.self, forCellReuseIdentifier: "VideoInfoCell")
-        table.register(ActionButtonCell.self, forCellReuseIdentifier: "ActionButtonCell")
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+        // 注册 Cell
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
         return table
     }()
@@ -43,12 +40,12 @@ class ViewController: UIViewController {
     private enum Section: Int, CaseIterable {
         case videoInfo    // 素材信息
         case actions      // 操作按钮
-        case tools        // 工具按钮
+        case tools        // 工具
 
-        var title: String {
+        var title: String? {
             switch self {
             case .videoInfo: return "当前素材"
-            case .actions: return "操作"
+            case .actions: return nil
             case .tools: return "工具"
             }
         }
@@ -57,7 +54,7 @@ class ViewController: UIViewController {
             switch self {
             case .videoInfo: return nil
             case .actions: return "请确保已在微信中录制视频草稿后再执行替换"
-            case .tools: return "系统诊断可帮助排查权限问题"
+            case .tools: return nil
             }
         }
     }
@@ -75,7 +72,7 @@ class ViewController: UIViewController {
     // MARK: - UI 设置
 
     private func setupUI() {
-        title = "微信视频替换工具"
+        title = "微信视频替换"
         view.backgroundColor = .systemGroupedBackground
 
         // 添加表格视图
@@ -95,8 +92,7 @@ class ViewController: UIViewController {
     private func setupViewModel() {
         viewModel.onStatusUpdate = { [weak self] status in
             DispatchQueue.main.async {
-                // 状态更新时刷新表格
-                self?.tableView.reloadSections(IndexSet(integer: Section.actions.rawValue), with: .none)
+                self?.tableView.reloadData()
             }
         }
 
@@ -130,7 +126,7 @@ class ViewController: UIViewController {
         guard !isExecuting else { return }
 
         // 显示选择来源的菜单
-        let alert = UIAlertController(title: "选择视频来源", message: "请选择视频的来源", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "选择视频来源", message: nil, preferredStyle: .actionSheet)
 
         // 从相册选择
         alert.addAction(UIAlertAction(title: "从相册选择", style: .default) { [weak self] _ in
@@ -167,12 +163,11 @@ class ViewController: UIViewController {
 
     /// 从文件选择视频
     private func selectFromFiles() {
-        // 支持所有文件类型，让用户可以选择任何文件（包括没有扩展名的视频）
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.item])
         picker.delegate = self
         picker.allowsMultipleSelection = false
 
-        print("📁 [Files] 文件选择器已打开，支持所有文件类型")
+        print("📁 [Files] 文件选择器已打开")
 
         present(picker, animated: true)
     }
@@ -180,19 +175,19 @@ class ViewController: UIViewController {
     @objc private func replaceButtonTapped() {
         guard !isExecuting else { return }
 
-        // ⚠️ 重要：在显示 alert 之前预先获取并缓存微信路径
+        // 预先获取并缓存微信路径
         print("🔍 [Replace] 预先获取并缓存微信容器路径...")
         guard viewModel.prefetchWechatPath() else {
             print("❌ [Replace] 找不到微信应用")
             showAlert(title: "错误", message: "找不到微信应用，请确保微信已安装")
             return
         }
-        print("✅ [Replace] 微信容器路径已缓存，可以显示确认对话框")
+        print("✅ [Replace] 微信容器路径已缓存")
 
         // 确认对话框
         let alert = UIAlertController(
             title: "确认替换",
-            message: "请确保你已经在微信中录制了一个视频草稿（进入发布页面但未发布）",
+            message: "请确保已在微信中录制视频草稿（进入发布页面但未发布）",
             preferredStyle: .alert
         )
 
@@ -207,15 +202,11 @@ class ViewController: UIViewController {
     @objc private func diagnosticTapped() {
         print("🔍 [Diagnostic] 开始系统诊断...")
 
-        // 执行诊断
         let results = WechatService.diagnoseContainerAccess()
-
-        // 显示结果
         let message = results.joined(separator: "\n")
 
         let alert = UIAlertController(title: "系统诊断", message: message, preferredStyle: .alert)
 
-        // 添加复制按钮
         alert.addAction(UIAlertAction(title: "复制日志", style: .default) { _ in
             UIPasteboard.general.string = message
             print("📋 [Diagnostic] 日志已复制到剪贴板")
@@ -225,7 +216,6 @@ class ViewController: UIViewController {
 
         present(alert, animated: true)
 
-        // 同时输出到控制台
         print("📋 [Diagnostic] 诊断结果:")
         for line in results {
             print(line)
@@ -243,22 +233,18 @@ class ViewController: UIViewController {
 
         alert.addAction(UIAlertAction(title: "取消", style: .cancel))
         alert.addAction(UIAlertAction(title: "清除", style: .destructive) { [weak self] _ in
-            // 清除素材缓存
             VideoStorageManager.shared.clear()
             print("✅ [ClearCache] 已清除素材缓存")
 
-            // 清除微信路径缓存
             self?.viewModel.clearWechatPathCache()
             print("✅ [ClearCache] 已清除微信路径缓存")
 
-            // 清除所有 UserDefaults（如果需要）
             if let bundleID = Bundle.main.bundleIdentifier {
                 UserDefaults.standard.removePersistentDomain(forName: bundleID)
                 UserDefaults.standard.synchronize()
                 print("✅ [ClearCache] 已清除所有 UserDefaults")
             }
 
-            // 重新加载UI
             self?.viewModel.reloadSavedVideo()
             self?.tableView.reloadData()
 
@@ -274,7 +260,7 @@ class ViewController: UIViewController {
      */
     private func startReplace() {
         isExecuting = true
-        tableView.reloadSections(IndexSet(integer: Section.actions.rawValue), with: .none)
+        tableView.reloadData()
 
         viewModel.executeOneClickReplace { [weak self] success in
             DispatchQueue.main.async {
@@ -298,12 +284,12 @@ class ViewController: UIViewController {
 
     private func showSuccessAlert() {
         let alert = UIAlertController(
-            title: "✅ 替换成功",
+            title: "替换成功",
             message: "素材已成功替换！\n\n现在请:\n1. 打开微信\n2. 进入发布页面\n3. 查看视频是否已替换\n4. 点击发布",
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: "太好了！", style: .default))
+        alert.addAction(UIAlertAction(title: "好的", style: .default))
         present(alert, animated: true)
     }
 }
@@ -321,7 +307,7 @@ extension ViewController: UITableViewDataSource {
 
         switch sectionType {
         case .videoInfo:
-            return 1  // 素材信息卡片
+            return 1
         case .actions:
             return 2  // 更换素材 + 一键替换
         case .tools:
@@ -334,84 +320,92 @@ extension ViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+
+        // 使用 iOS 14+ 的配置 API
+        var content = cell.defaultContentConfiguration()
+
         switch sectionType {
         case .videoInfo:
-            return configureVideoInfoCell(tableView, indexPath: indexPath)
+            configureVideoInfoCell(content: &content)
         case .actions:
-            return configureActionCell(tableView, indexPath: indexPath)
+            configureActionCell(content: &content, row: indexPath.row)
         case .tools:
-            return configureToolCell(tableView, indexPath: indexPath)
+            configureToolCell(content: &content, row: indexPath.row)
         }
+
+        cell.contentConfiguration = content
+        cell.accessoryType = sectionType == .tools ? .disclosureIndicator : .none
+
+        return cell
     }
 
     // 配置素材信息 Cell
-    private func configureVideoInfoCell(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "VideoInfoCell", for: indexPath) as! VideoInfoCell
-        cell.configure(with: viewModel.savedVideo)
-        return cell
+    private func configureVideoInfoCell(content: inout UIListContentConfiguration) {
+        if let video = viewModel.savedVideo {
+            // 已选择素材
+            if #available(iOS 13.0, *) {
+                content.image = UIImage(systemName: "video.fill")
+            }
+            content.imageProperties.tintColor = .systemBlue
+            content.text = video.fileName
+            content.secondaryText = "\(video.formattedFileSize()) • \(video.formattedDuration())"
+        } else {
+            // 未选择素材
+            if #available(iOS 13.0, *) {
+                content.image = UIImage(systemName: "video.badge.plus")
+            }
+            content.imageProperties.tintColor = .systemGray
+            content.text = "未选择素材"
+            content.secondaryText = "点击下方\"更换素材\"选择视频"
+            content.textProperties.color = .secondaryLabel
+        }
     }
 
     // 配置操作按钮 Cell
-    private func configureActionCell(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ActionButtonCell", for: indexPath) as! ActionButtonCell
-
-        if indexPath.row == 0 {
-            // 更换素材按钮
-            cell.configure(
-                title: "更换素材",
-                icon: "arrow.triangle.2.circlepath",
-                color: .systemBlue,
-                enabled: !isExecuting
-            ) { [weak self] in
-                self?.changeVideoTapped()
+    private func configureActionCell(content: inout UIListContentConfiguration, row: Int) {
+        if row == 0 {
+            // 更换素材
+            if #available(iOS 13.0, *) {
+                content.image = UIImage(systemName: "arrow.triangle.2.circlepath")
             }
+            content.imageProperties.tintColor = .systemBlue
+            content.text = "更换素材"
+            content.secondaryText = "从相册或文件选择视频"
         } else {
-            // 一键替换按钮
+            // 一键替换
             let hasVideo = viewModel.savedVideo != nil
-            let title = isExecuting ? "执行中..." : "一键替换"
-            let icon = isExecuting ? "hourglass" : "play.fill"
+            let isEnabled = hasVideo && !isExecuting
 
-            cell.configure(
-                title: title,
-                icon: icon,
-                color: .systemGreen,
-                enabled: hasVideo && !isExecuting,
-                highlighted: hasVideo
-            ) { [weak self] in
-                self?.replaceButtonTapped()
+            if #available(iOS 13.0, *) {
+                content.image = UIImage(systemName: isExecuting ? "hourglass" : "play.fill")
             }
+            content.imageProperties.tintColor = isEnabled ? .systemGreen : .systemGray
+            content.text = isExecuting ? "执行中..." : "一键替换"
+            content.secondaryText = hasVideo ? "替换微信视频草稿" : "请先选择素材"
+            content.textProperties.color = isEnabled ? .label : .secondaryLabel
         }
-
-        return cell
     }
 
-    // 配置工具按钮 Cell
-    private func configureToolCell(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
-        cell.accessoryType = .disclosureIndicator
-
-        var content = cell.defaultContentConfiguration()
-
-        if indexPath.row == 0 {
+    // 配置工具 Cell
+    private func configureToolCell(content: inout UIListContentConfiguration, row: Int) {
+        if row == 0 {
             // 系统诊断
-            content.text = "系统诊断"
-            content.secondaryText = "检查权限和路径配置"
             if #available(iOS 13.0, *) {
                 content.image = UIImage(systemName: "stethoscope")
             }
             content.imageProperties.tintColor = .systemGray
+            content.text = "系统诊断"
+            content.secondaryText = "检查权限和路径配置"
         } else {
             // 清除缓存
-            content.text = "清除缓存"
-            content.secondaryText = "清空素材和路径缓存"
             if #available(iOS 13.0, *) {
                 content.image = UIImage(systemName: "trash")
             }
             content.imageProperties.tintColor = .systemRed
+            content.text = "清除缓存"
+            content.secondaryText = "清空素材和路径缓存"
         }
-
-        cell.contentConfiguration = content
-        return cell
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -432,28 +426,21 @@ extension ViewController: UITableViewDelegate {
 
         guard let sectionType = Section(rawValue: indexPath.section) else { return }
 
-        // 只有工具部分响应点击
-        if sectionType == .tools {
+        switch sectionType {
+        case .videoInfo:
+            break
+        case .actions:
+            if indexPath.row == 0 {
+                changeVideoTapped()
+            } else {
+                replaceButtonTapped()
+            }
+        case .tools:
             if indexPath.row == 0 {
                 diagnosticTapped()
             } else {
                 clearCacheTapped()
             }
-        }
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let sectionType = Section(rawValue: indexPath.section) else {
-            return UITableView.automaticDimension
-        }
-
-        switch sectionType {
-        case .videoInfo:
-            return UITableView.automaticDimension
-        case .actions:
-            return 60  // 操作按钮高度
-        case .tools:
-            return UITableView.automaticDimension
         }
     }
 }
@@ -469,7 +456,6 @@ extension ViewController: PHPickerViewControllerDelegate {
         let itemProvider = result.itemProvider
 
         if itemProvider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
-            // 获取 PHAsset
             if let assetIdentifier = result.assetIdentifier {
                 viewModel.selectVideo(assetID: assetIdentifier)
                 tableView.reloadData()
@@ -487,9 +473,7 @@ extension ViewController: UIDocumentPickerDelegate {
         guard let url = urls.first else { return }
 
         print("📁 [Files] 选择文件: \(url.lastPathComponent)")
-        print("   - 路径: \(url.path)")
 
-        // 开始访问安全范围资源
         guard url.startAccessingSecurityScopedResource() else {
             print("❌ [Files] 无法访问安全范围资源")
             showAlert(title: "错误", message: "无法访问选择的文件")
@@ -500,25 +484,20 @@ extension ViewController: UIDocumentPickerDelegate {
             url.stopAccessingSecurityScopedResource()
         }
 
-        // 验证文件是否存在
         guard FileManager.default.fileExists(atPath: url.path) else {
             print("❌ [Files] 文件不存在")
             showAlert(title: "错误", message: "选择的文件不存在")
             return
         }
 
-        // 获取文件信息
         do {
             let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
             let fileSize = attributes[.size] as? Int64 ?? 0
 
-            // 使用文件选择器的视频
             viewModel.selectVideoFromFile(url: url, fileName: url.lastPathComponent, fileSize: fileSize)
             tableView.reloadData()
 
             print("✅ [Files] 文件选择成功")
-            print("   - 文件名: \(url.lastPathComponent)")
-            print("   - 大小: \(fileSize) bytes")
 
         } catch {
             print("❌ [Files] 获取文件信息失败: \(error)")
@@ -529,169 +508,5 @@ extension ViewController: UIDocumentPickerDelegate {
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         controller.dismiss(animated: true)
         print("📁 [Files] 用户取消选择")
-    }
-}
-
-// MARK: - 自定义 Cell 类
-
-/// 素材信息展示 Cell
-class VideoInfoCell: UITableViewCell {
-
-    private let iconImageView: UIImageView = {
-        let imageView = UIImageView()
-        if #available(iOS 13.0, *) {
-            imageView.image = UIImage(systemName: "video.fill")
-        }
-        imageView.tintColor = .systemGray
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 17, weight: .semibold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    private let detailLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 15)
-        label.textColor = .secondaryLabel
-        label.numberOfLines = 2
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupUI() {
-        selectionStyle = .none
-
-        contentView.addSubview(iconImageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(detailLabel)
-
-        NSLayoutConstraint.activate([
-            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            iconImageView.widthAnchor.constraint(equalToConstant: 28),
-            iconImageView.heightAnchor.constraint(equalToConstant: 28),
-
-            titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 12),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-
-            detailLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            detailLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            detailLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
-        ])
-    }
-
-    func configure(with video: SavedVideo?) {
-        if let video = video {
-            titleLabel.text = video.fileName
-            titleLabel.textColor = .label
-            detailLabel.text = "\(video.formattedFileSize()) | \(video.formattedDuration())"
-            iconImageView.tintColor = .systemBlue
-        } else {
-            titleLabel.text = "未选择素材"
-            titleLabel.textColor = .secondaryLabel
-            detailLabel.text = "点击"更换素材"选择视频"
-            iconImageView.tintColor = .systemGray
-        }
-    }
-}
-
-/// 操作按钮 Cell
-class ActionButtonCell: UITableViewCell {
-
-    private let iconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 17, weight: .semibold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    private var action: (() -> Void)?
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func setupUI() {
-        selectionStyle = .none
-
-        contentView.addSubview(iconImageView)
-        contentView.addSubview(titleLabel)
-
-        NSLayoutConstraint.activate([
-            iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            iconImageView.widthAnchor.constraint(equalToConstant: 24),
-            iconImageView.heightAnchor.constraint(equalToConstant: 24),
-
-            titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 12),
-            titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
-        ])
-
-        // 添加点击手势
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cellTapped))
-        contentView.addGestureRecognizer(tapGesture)
-    }
-
-    @objc private func cellTapped() {
-        action?()
-    }
-
-    func configure(
-        title: String,
-        icon: String,
-        color: UIColor,
-        enabled: Bool = true,
-        highlighted: Bool = false,
-        action: @escaping () -> Void
-    ) {
-        self.action = action
-
-        titleLabel.text = title
-        titleLabel.textColor = enabled ? color : .systemGray3
-
-        if #available(iOS 13.0, *) {
-            iconImageView.image = UIImage(systemName: icon)
-        }
-        iconImageView.tintColor = enabled ? color : .systemGray3
-
-        contentView.isUserInteractionEnabled = enabled
-        contentView.alpha = enabled ? 1.0 : 0.5
-
-        // 高亮样式（一键替换按钮）
-        if highlighted {
-            backgroundColor = enabled ? color.withAlphaComponent(0.1) : .systemGray6
-        } else {
-            backgroundColor = .systemBackground
-        }
     }
 }
