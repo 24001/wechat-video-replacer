@@ -199,29 +199,6 @@ class ViewController: UIViewController {
         present(alert, animated: true)
     }
 
-    @objc private func diagnosticTapped() {
-        print("🔍 [Diagnostic] 开始系统诊断...")
-
-        let results = WechatService.diagnoseContainerAccess()
-        let message = results.joined(separator: "\n")
-
-        let alert = UIAlertController(title: "系统诊断", message: message, preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "复制日志", style: .default) { _ in
-            UIPasteboard.general.string = message
-            print("📋 [Diagnostic] 日志已复制到剪贴板")
-        })
-
-        alert.addAction(UIAlertAction(title: "关闭", style: .cancel))
-
-        present(alert, animated: true)
-
-        print("📋 [Diagnostic] 诊断结果:")
-        for line in results {
-            print(line)
-        }
-    }
-
     @objc private func clearCacheTapped() {
         print("🗑️ [ClearCache] 清除所有缓存...")
 
@@ -311,7 +288,7 @@ extension ViewController: UITableViewDataSource {
         case .actions:
             return 2  // 更换素材 + 一键替换
         case .tools:
-            return 2  // 系统诊断 + 清除缓存
+            return 1  // 清除缓存
         }
     }
 
@@ -389,23 +366,13 @@ extension ViewController: UITableViewDataSource {
 
     // 配置工具 Cell
     private func configureToolCell(content: inout UIListContentConfiguration, row: Int) {
-        if row == 0 {
-            // 系统诊断
-            if #available(iOS 13.0, *) {
-                content.image = UIImage(systemName: "stethoscope")
-            }
-            content.imageProperties.tintColor = .systemGray
-            content.text = "系统诊断"
-            content.secondaryText = "检查权限和路径配置"
-        } else {
-            // 清除缓存
-            if #available(iOS 13.0, *) {
-                content.image = UIImage(systemName: "trash")
-            }
-            content.imageProperties.tintColor = .systemRed
-            content.text = "清除缓存"
-            content.secondaryText = "清空素材和路径缓存"
+        // 清除缓存
+        if #available(iOS 13.0, *) {
+            content.image = UIImage(systemName: "trash")
         }
+        content.imageProperties.tintColor = .systemRed
+        content.text = "清除缓存"
+        content.secondaryText = "清空素材和路径缓存"
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -436,11 +403,7 @@ extension ViewController: UITableViewDelegate {
                 replaceButtonTapped()
             }
         case .tools:
-            if indexPath.row == 0 {
-                diagnosticTapped()
-            } else {
-                clearCacheTapped()
-            }
+            clearCacheTapped()
         }
     }
 }
